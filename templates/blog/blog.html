@@ -13,20 +13,23 @@
                 <div class="h-full bg-white rounded overflow-hidden shadow-md hover:shadow-lg relative smooth">
                     <a href="{% url 'blogPage' post.slug %}" class="no-underline hover:no-underline">
                         <img src="/media/{{post.image}}" class="h-48 w-full rounded-t shadow-lg">
-                        
+
                         <div class="p-6 h-auto md:h-48">
-                            <div class=" flex items-center  py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                                <span class="bg-purple-500 px-3 py-1.5 rounded-full">{{post.category}}</span>
+                            <div
+                                class=" flex items-center  py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white ">
+                                <span class="bg-sky-400 px-3 py-1.5 rounded-full">{{post.category}}</span>
                             </div>
                             <div class="font-bold text-xl text-gray-900">{{post.title}}</div>
                             <p class="text-gray-800 font-serif text-base mb-5">
                                 {{post.content|safe |truncatechars:150}}
-                                <a class=" mt-4 text-purple-900" href="/blogpost/windows-11-update-installation/">Read more</a>
+                                <a class=" mt-4 text-sky-400" href="{% url 'blogPage' post.slug %}">Read more</a>
                             </p>
                         </div>
 
                         <div class="flex items-center justify-start inset-x-0 bottom-0 p-6">
-                            <p class="pt-2 text-xs font-medium"><a href="#_" class="mr-1 underline">{{post.author}}</a> · <span class="mx-3">{{post.timeStamp}}</span> · <span class="mx-2 text-gray-600">{{post.timeRead}} min. read</span></p>
+                            <p class="pt-2 text-xs font-medium"><a href="#_" class="mr-1 underline">{{post.author}}</a>
+                                · <span class="mx-3">{{post.timeStamp}}</span> · <span
+                                    class="mx-2 text-gray-600">{{post.timeRead}} min. read</span></p>
                         </div>
                     </a>
                 </div>

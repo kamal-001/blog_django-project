@@ -71,7 +71,7 @@
 
     <div class="mx-0 sm:mx-6">
 
-        <div class="bg-white w-full p-8 md:p-24 text-xl md:text-2xl text-gray-800 leading-normal shadow-md m-5">
+        <div class="bg-white w-full p-8 md:p-24 text-xl md:text-2xl text-gray-800 leading-normal shadow-md">
             <!-- <div class="container w-full max-w-6xl mx-auto bg-white bg-cover mt-8 rounded"
                 style="background-image:url('/media/{{post.image}}'); height: 75vh;">
             </div> -->
@@ -83,111 +83,58 @@
                 {{post.content|safe}}
             </p>
             <!--/ Post Content-->
-            <hr>
+            <hr class=" border-b-2 border-gray-400 my-4 ">
             <!-- Comments -->
             <div class="bg-white w-full h-auto flex flex-col space-y-2">
                 <div>
-                    <p>
-                        Comments
-                    </p>
+                    <strong class=" ">Comments</strong> 
                 </div>
                 <!-- New Comment Here -->
                 {% if user.is_authenticated %}
                 <form action="/blog/postComment/" method="post">
                     {% csrf_token %}
-                    <div class="flex items-center">
-                        <div class="group relative flex flex-shrink-0 self-start cursor-pointer">
-                            <img src="/media/Images/kali.png" alt="" class="h-8 w-8 object-fill rounded-full">
-
-                        </div>
-
-                        <div class="flex items-center justify-center ">
-                            <div class="block">
-                                <div class="flex justify-center items-center space-x-2">
-                                    <div class="bg-gray-100 w-auto rounded-xl px-2 pb-2">
-                                        <div class="text-xs">
-                                            <label class="block text-gray-700 text-sm font-bold mb-2">Post
-                                                Comment</label>
-                                            <input name="comment" placeholder="Enter comment here"
-                                                class="bg-gray-200 w-full text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block w-full appearance-none"
-                                                type="text">
-                                            <input type="hidden" name="postSno" value="{{post.sno}}">
-                                            <input type="hidden" name="parentSno" value="">
-                                            <button type="submit"
-                                                class="bg-gray-700 text-white font-bold py-2 px-4 rounded hover:bg-gray-600">Submit</button>
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="self-stretch flex justify-center items-center transform transition-opacity duration-200 opacity-0 hover:opacity-100">
-                                        <a href="#" class="">
-                                            <div
-                                                class="text-xs cursor-pointer flex h-6 w-6 transform transition-colors duration-200 hover:bg-gray-100 rounded-full items-center justify-center">
-                                                <svg class="w-4 h-6" fill="none" stroke="currentColor"
-                                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        stroke-width="2"
-                                                        d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z">
-                                                    </path>
-                                                </svg>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                                <!-- New Subcomment Paste Here !! -->
+                    <div class="flex ">
+                        <div class="  flex my-3 w-full">
+                            <div class="  flex-shrink-0 mr-3"><img src="/media/Images/kali.png" alt=""
+                                    class="  mt-2 rounded-full w-8 h-8 sm:w-10 sm:h-10"></div>
+                            <div
+                                class="text-sm flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 space-y-2 leading-relaxed  max-w-[75vw] break-words">
+                                <strong class=" ">Post Comment</strong> 
+                                <input required name="comment" placeholder="Enter comment here"
+                                    class="bg-gray-200 w-full text-gray-700 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 block appearance-none"
+                                    type="text">
+                                <input type="hidden" name="postSno" value="{{post.sno}}">
+                                <input type="hidden" name="parentSno" value="">
+                                <button type="submit"
+                                    class=" bg-gray-700 text-white font-bold py-2 px-4 rounded hover:bg-gray-600">Submit</button>
                             </div>
                         </div>
                     </div>
                 </form>
                 {% else %}
                 <p>
-                    Please <span><a href="#">login</a></span> to post a comment
+                    Please <span><a class="text-sky-400 text-xl" href="#">login</a></span> to post a comment
                 </p>
                 {% endif %}
             </div>
             <!-- /New Comment Here -->
             {% for comment in comments %}
-            <div class="flex my-3">
-                <div class="group relative flex flex-shrink-0 self-start cursor-pointer">
-                    <img src="/media/Images/kali.png" alt="" class="h-8 w-8 object-fill rounded-full">
-
-                </div>
-                <div class="flex items-center justify-center ">
-                    <div class="block">
-                        <div class="flex justify-center items-center space-x-2">
-                            <div class="bg-gray-100 w-auto rounded-xl px-2 pb-2">
-                                <div class="font-medium">
-                                    <a href="#" class="hover:underline text-sm">
-                                        <small>{{comment.user.username}}</small>
-                                    </a>
-                                </div>
-                                <div class="text-xs">
-                                    {{comment.comment}}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="flex justify-start items-center text-xs w-full">
-                            <div class="font-semibold text-gray-700 px-2 flex items-center justify-center space-x-1">
-                                <a href="#" class="hover:underline">
-                                    <small>Like</small>
-                                </a>
-                                <small class="self-center">.</small>
-                                <a href="#" class="hover:underline">
-                                    <small>Reply</small>
-                                </a>
-                                <small class="self-center">.</small>
-                                <a href="#" class="hover:underline">
-                                    <small>{{comment.timestamp| naturaltime}}</small>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- Subcomment Sample -->
-                        <!-- New Subcomment Paste Here !! -->
-
+            <div class="flex ">
+                <div class="  flex my-3 w-full">
+                    <div class="  flex-shrink-0 mr-3"><img src="/media/Images/kali.png" alt=""
+                            class="  mt-2 rounded-full w-8 h-8 sm:w-10 sm:h-10"></div>
+                    <div
+                        class="text-sm flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed  max-w-[75vw] break-words">
+                        <strong class=" ">@{{comment.user.username}}</strong> <span
+                            class="  text-xs text-gray-400">{{comment.timestamp| naturaltime}}</span>
+                        <p class="  text-sm"> {{comment.comment}}</p>
+                        <!-- <div class="  flex space-x-4"><span
+                                class="  mt-3 uppercase tracking-wide text-gray-400 font-bold text-xs cursor-pointer">View
+                                1 Replies</span></div> -->
                     </div>
                 </div>
             </div>
             {% endfor %}
-            
             <!-- /Comments -->
         </div>
     </div>
